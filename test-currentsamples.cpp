@@ -8,7 +8,7 @@
 TEST_CASE("Check validity")
 {
 	std::vector<int> test_samples = {3,3,5,4,10,11,12};
-	REQUIRE(TRUE == isSampleValid(test_samples));
+	REQUIRE(1 == isSampleValid(test_samples));
 }
 
 TEST_CASE("Detect sample frequency")
