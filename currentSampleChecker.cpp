@@ -9,6 +9,15 @@ struct Limits
 	int minElement;
 };
 
+std::string getCsvInfo(T_RangeList range,std::vector<int> readings)
+{
+	std::string outputString = "Range, Readings";
+    for (int i=0; i<range.size(); i++) {
+        outputString += "\n" + std::to_string(range[i].first) + "-"+std::to_string(range[i].first)+ ", " + std::to_string(readings[i]);
+    }
+	std::cout << outputString << std::endl;
+    return outputString;
+}
 
 Limits getUpperandLowerlimits(std::vector<int>& samples)
 {
@@ -37,6 +46,7 @@ T_RangeList detectRanges(std::vector<int>& samples)
 
 T_Readings detectFrequency(std::vector<int>& samples, T_RangeList CurrentRange)
 {
+	std::cout << "hhere1"<<std::endl;
 	int frequencyCount = 0;
 	std::vector<int> noOfReadings;
 
@@ -59,19 +69,19 @@ T_Readings detectFrequency(std::vector<int>& samples, T_RangeList CurrentRange)
 
 bool isSampleValid(std::vector<int>& samples)
 {
-	std::cout << "hhere0"<<std::endl;
+
 	if(!samples.size())
 	{
-		std::cout << "hhere1"<<std::endl;
+		
 		return false;
 	}
 	else
 	{
-		for(std::vector<int>::iterator it = samples.begin(); it != current_samples.end(); ++it) 
+		for(int i=0; i= samples.size(); i++) 
 		{
-			if(-1 >= *it)
+			if(-1 >= samples[i])
 			{
-				std::cout << *it<<std::endl;
+				std::cout << samples[i]<<std::endl;
 				return false;
 			}
 	
@@ -80,28 +90,23 @@ bool isSampleValid(std::vector<int>& samples)
 	return true;
 }
 
-std::string printInCsv(T_RangeList range,std::vector<int> readings)
-{
-	std::string outputString = "Range, Readings";
-    for (int i=0; i<range.size(); i++) {
-        outputString += "\n" + std::to_string(range[i].first) + "-"+std::to_string(range[i].first)+ ", " + std::to_string(readings[i]);
-    }
-	std::cout << outputString << std::endl;
-    return outputString;
-}
 
 
-void checkTheRangeAndReadings(std::vector<int> sequence)
+
+std::string checkTheRangeAndReadings(std::vector<int> sequence)
 {
 	T_RangeList range;
 	std::vector<int> readings;
-	
+	std::string csvData = "";
 
     if(isSampleValid(sequence))
 	{
 		range = detectRanges(sequence);
 		readings = detectFrequency(sequence, range);
-		printInCsv(range, readings);
+		csvData= getCsvInfo(range, readings);
+		std::cout << csvData;
 	}
+
+	return csvData;
 }
 

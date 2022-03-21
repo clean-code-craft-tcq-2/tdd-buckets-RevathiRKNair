@@ -7,8 +7,9 @@
 typedef std:: vector<std::pair<int, int> > T_RangeList;
 typedef std:: vector<int> T_Readings;
 
-
+std::string checkTheRangeAndReadings(std::vector<int> sequence);
 void currentSampleInputs(std::vector<int>& samples);
+
 T_Readings detectFrequency(std::vector<int>& samples, T_RangeList CurrentRange);
 T_RangeList detectRanges(std::vector<int>& samples);
 
