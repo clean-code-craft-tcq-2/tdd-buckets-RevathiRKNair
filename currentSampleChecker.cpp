@@ -15,7 +15,7 @@ std::string getCsvInfo(T_RangeList range,std::vector<int> readings)
     for (int i=0; i<range.size(); i++) {
         outputString += "\n" + std::to_string(range[i].first) + "-"+std::to_string(range[i].first)+ ", " + std::to_string(readings[i]);
     }
-	std::cout << outputString << std::endl;
+	
     return outputString;
 }
 
@@ -46,7 +46,6 @@ T_RangeList detectRanges(std::vector<int>& samples)
 
 T_Readings detectFrequency(std::vector<int>& samples, T_RangeList CurrentRange)
 {
-	std::cout << "hhere1"<<std::endl;
 	int frequencyCount = 0;
 	std::vector<int> noOfReadings;
 
@@ -69,25 +68,28 @@ T_Readings detectFrequency(std::vector<int>& samples, T_RangeList CurrentRange)
 
 bool isSampleValid(std::vector<int>& samples)
 {
+	bool validitySatus = 1;
 
 	if(!samples.size())
 	{
 		
-		return false;
+		validitySatus = 0;
 	}
 	else
 	{
-		for(int i=0; i= samples.size(); i++) 
+
+		for(int i=0; i<=samples.size(); i++) 
 		{
 			if(-1 >= samples[i])
 			{
-				std::cout << samples[i]<<std::endl;
-				return false;
+				validitySatus = 0;
 			}
 	
 		}	
 	}
-	return true;
+
+
+	return validitySatus;
 }
 
 
